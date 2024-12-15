@@ -7,6 +7,7 @@ let eyeL;
 let wristR;
 let wristL;
 let d;
+let bodyPose;
 
 let wArr;
 let cArr;
@@ -44,6 +45,10 @@ function preload() {
     loadStrings('sketch.txt', changeToString);
 }
 
+function preload() {
+  // Load the bodyPose model
+  bodyPose = ml5.bodyPose();
+}
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -54,10 +59,11 @@ function setup() {
     //frameRate(60);
     video = createCapture(VIDEO);
     video.hide();
-    poseNet = ml5.poseNet(video, modelLoaded);
+    //poseNet = ml5.bodyPose.detectStart(video, gotPose)
+    bodyPose.detectStart(video, gotPoses);
     //creates an array of data with this function, and runs it through the
     //gotPoses function to store it
-    poseNet.on('pose', gotPoses);
+    //poseNet.on('pose', gotPoses);
 
 
 }
